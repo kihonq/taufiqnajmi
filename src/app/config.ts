@@ -45,7 +45,6 @@ export const VERCEL_GIT_COMMIT_SHA_SHORT = VERCEL_GIT_COMMIT_SHA
   : undefined;
 export const IS_VERCEL_GIT_PROVIDER_GITHUB = VERCEL_GIT_PROVIDER === 'github';
 export const VERCEL_GIT_COMMIT_URL = IS_VERCEL_GIT_PROVIDER_GITHUB
-  // eslint-disable-next-line max-len
   ? `https://github.com/${VERCEL_GIT_REPO_OWNER}/${VERCEL_GIT_REPO_SLUG}/commit/${VERCEL_GIT_COMMIT_SHA}`
   : undefined;
 
@@ -159,10 +158,6 @@ export const POSTGRES_SSL_ENABLED =
 export const HAS_REDIS_STORAGE =
   Boolean(process.env.KV_URL);
 
-// STORAGE: VERCEL BLOB
-export const HAS_VERCEL_BLOB_STORAGE =
-  Boolean(process.env.BLOB_READ_WRITE_TOKEN);
-
 // STORAGE: Cloudflare R2
 // Includes separate check for client-side usage, i.e., url construction
 export const HAS_CLOUDFLARE_R2_STORAGE_CLIENT =
@@ -185,7 +180,6 @@ export const HAS_AWS_S3_STORAGE =
   Boolean(process.env.AWS_S3_SECRET_ACCESS_KEY);
 
 export const HAS_MULTIPLE_STORAGE_PROVIDERS = [
-  HAS_VERCEL_BLOB_STORAGE,
   HAS_CLOUDFLARE_R2_STORAGE,
   HAS_AWS_S3_STORAGE,
 ].filter(Boolean).length > 1;
@@ -196,9 +190,7 @@ export const CURRENT_STORAGE: StorageType =
   (process.env.NEXT_PUBLIC_STORAGE_PREFERENCE as StorageType | undefined) || (
     HAS_CLOUDFLARE_R2_STORAGE_CLIENT
       ? 'cloudflare-r2'
-      : HAS_AWS_S3_STORAGE_CLIENT
-        ? 'aws-s3'
-        : 'vercel-blob'
+      : 'aws-s3'
   );
 
 // AI
@@ -331,11 +323,9 @@ export const APP_CONFIGURATION = {
     /\.vercel-storage\.com\//.test(process.env.POSTGRES_URL ?? '')
   ),
   hasRedisStorage: HAS_REDIS_STORAGE,
-  hasVercelBlobStorage: HAS_VERCEL_BLOB_STORAGE,
   hasCloudflareR2Storage: HAS_CLOUDFLARE_R2_STORAGE,
   hasAwsS3Storage: HAS_AWS_S3_STORAGE,
   hasStorageProvider: (
-    HAS_VERCEL_BLOB_STORAGE ||
     HAS_CLOUDFLARE_R2_STORAGE ||
     HAS_AWS_S3_STORAGE
   ),

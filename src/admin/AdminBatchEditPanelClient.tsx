@@ -91,7 +91,6 @@ export default function AdminBatchEditPanelClient({
       <LoaderButton
         className="min-h-[2.5rem]"
         icon={<FaCheck size={15} />}
-        // eslint-disable-next-line max-len
         confirmText={`Are you sure you want to apply tags to ${photosText}? This action cannot be undone.`}
         onClick={() => {
           setIsPerformingSelectEdit?.(true);

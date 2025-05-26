@@ -1,5 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import { clsx } from 'clsx/lite';
 import {
   BASE_URL,
@@ -26,6 +24,7 @@ import { revalidatePath } from 'next/cache';
 import RecipeModal from '@/recipe/RecipeModal';
 import ThemeColors from '@/app/ThemeColors';
 import AppTextProvider from '@/i18n/state/AppTextProvider';
+import DatabaseInitializer from '@/db/DatabaseInitializer';
 
 import '../tailwind.css';
 
@@ -115,10 +114,9 @@ export default function RootLayout({
                 </div>
                 <CommandK />
               </SwrConfigClient>
-              <Analytics debug={false} />
-              <SpeedInsights debug={false}  />
               <PhotoEscapeHandler />
               <ToasterWithThemes />
+              <DatabaseInitializer />
             </ThemeProvider>
           </AppTextProvider>
         </AppStateProvider>

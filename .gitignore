@@ -1,5 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# VSCode
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
 # dependencies
 /node_modules
 /.pnp
@@ -26,13 +31,29 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.production
 
 # vercel
 .vercel
 
+# coolify
+.coolify
+.env.coolify
+
+# coolify-setup
+.coolify-setup
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# build caches
+.turbo
+.swc
+
+# logs
+*.log
 
 # temp files
 temp.jpg

@@ -38,7 +38,6 @@ export default function AdminAppConfigurationClient({
   hasVercelPostgres,
   hasRedisStorage,
   hasStorageProvider,
-  hasVercelBlobStorage,
   hasCloudflareR2Storage,
   hasAwsS3Storage,
   hasMultipleStorageProviders,
@@ -183,7 +182,6 @@ export default function AdminAppConfigurationClient({
               Vercel Postgres:
               {' '}
               <AdminLink
-                // eslint-disable-next-line max-len
                 href="https://vercel.com/docs/storage/vercel-postgres/quickstart#create-a-postgres-database"
                 externalIcon
               >
@@ -206,7 +204,6 @@ export default function AdminAppConfigurationClient({
               : !hasStorageProvider
                 ? 'Setup storage (one of the following)'
                 : hasMultipleStorageProviders
-                  // eslint-disable-next-line max-len
                   ? `Setup storage (new uploads go to: ${labelForStorage(currentStorage)})`
                   : 'Setup storage'}
           status={hasStorageProvider}
@@ -215,29 +212,12 @@ export default function AdminAppConfigurationClient({
           {storageError && renderError({
             connection: { provider: 'Storage', error: storageError},
           })}
-          {hasVercelBlobStorage
-            ? renderSubStatus('checked', 'Vercel Blob: connected')
-            : renderSubStatus('optional', <>
-              {labelForStorage('vercel-blob')}:
-              {' '}
-              <AdminLink
-                // eslint-disable-next-line max-len
-                href="https://vercel.com/docs/storage/vercel-blob/quickstart#create-a-blob-store"
-                externalIcon
-              >
-                create store
-              </AdminLink>
-              {' '} 
-              and connect to project
-            </>,
-            )}
           {hasCloudflareR2Storage
             ? renderSubStatus('checked', 'Cloudflare R2: connected')
             : renderSubStatus('optional', <>
               {labelForStorage('cloudflare-r2')}:
               {' '}
               <AdminLink
-                // eslint-disable-next-line max-len
                 href="https://github.com/sambecker/exif-photo-blog#cloudflare-r2"
                 externalIcon
               >
@@ -302,7 +282,6 @@ export default function AdminAppConfigurationClient({
           (check README for
           {' '}
           <AdminLink
-            // eslint-disable-next-line max-len
             href="https://github.com/sambecker/exif-photo-blog?tab=readme-ov-file#supported-languages"
           >
             supported languages
@@ -460,7 +439,6 @@ export default function AdminAppConfigurationClient({
               'NEXT_PUBLIC_STATICALLY_OPTIMIZE_PHOTO_CATEGORIES',
             )}
             {renderSubStatusWithEnvVar(
-              // eslint-disable-next-line max-len
               arePhotoCategoryOgImagesStaticallyOptimized ? 'checked' : 'optional',
               'NEXT_PUBLIC_STATICALLY_OPTIMIZE_PHOTO_CATEGORY_OG_IMAGES',
             )}

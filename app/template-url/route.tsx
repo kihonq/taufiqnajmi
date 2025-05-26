@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import {
   TEMPLATE_REPO_OWNER,
   TEMPLATE_REPO_NAME,

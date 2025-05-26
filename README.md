@@ -2,8 +2,6 @@
 
 https://github.com/sambecker/exif-photo-blog/assets/169298/4253ea54-558a-4358-8834-89943cfbafb4
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/sambecker-pro/clone?demo-description=Store%20photos%20with%20original%20camera%20data&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F39rys245Px3FVBGRJNYEON%2Fbf68d5c052bda9e9e5bec21878764bc3%2Fimage.png&demo-title=Photo%20Blog&demo-url=https%3A%2F%2Fphotos.sambecker.com&from=templates&project-name=Photo%20Blog&repository-name=exif-photo-blog&repository-url=https%3A%2F%2Fgithub.com%2Fsambecker%2Fexif-photo-blog&skippable-integrations=1&stores=%5B%7B%22type%22%3A%22postgres%22%7D%2C%7B%22type%22%3A%22blob%22%7D%5D&teamCreateStatus=hidden)
-
 🎬&nbsp;&nbsp;Demo
 -
 https://photos.sambecker.com
@@ -24,12 +22,19 @@ https://photos.sambecker.com
 
 🛠️&nbsp;&nbsp;Installation
 -
-### 1. Deploy to Vercel
 
-1. Click [Deploy](https://vercel.com/new/clone?demo-title=Photo+Blog&demo-description=Store+photos+with+original+camera+data&demo-url=https%3A%2F%2Fphotos.sambecker.com&demo-image=https%3A%2F%2Fphotos.sambecker.com%2Ftemplate-image-tight&project-name=Photo+Blog&repository-name=exif-photo-blog&repository-url=https%3A%2F%2Fgithub.com%2Fsambecker%2Fexif-photo-blog&from=templates&skippable-integrations=1&teamCreateStatus=hidden&stores=%5B%7B%22type%22%3A%22postgres%22%7D%2C%7B%22type%22%3A%22blob%22%7D%5D)
-2. Add required storage ([Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres/quickstart#create-a-postgres-database) + [Vercel Blob](https://vercel.com/docs/storage/vercel-blob/quickstart#create-a-blob-store)) as part of template installation
-3. Configure environment variable for production domain in project settings
-   - `NEXT_PUBLIC_DOMAIN` (e.g., photos.domain.com—used in absolute urls and seen in navigation if no explicit nav title is set)
+
+### 1. Deploy to Coolify
+
+Instead of Vercel, this project can be self-hosted using [Coolify](https://coolify.io/), an open-source, self-hostable Heroku/Netlify/Vercel alternative.
+
+#### Key Benefits of Coolify Deployment
+- Full control over your infrastructure and data
+- Cost-effective self-hosting option
+- No vendor lock-in
+- Support for both PostgreSQL and storage providers
+
+For detailed setup instructions, configuration details, and best practices, see the [Coolify deployment documentation](README-COOLIFY.md).
 
 ### 2. Setup Auth
 
@@ -164,7 +169,7 @@ Application behavior can be changed by configuring the following environment var
 
 ## Alternate storage providers
 
-Only one storage adapter—Vercel Blob, Cloudflare R2, or AWS S3—can be used at a time. Ideally, this is configured before photos are uploaded (see [Issue #34](https://github.com/sambecker/exif-photo-blog/issues/34) for migration considerations). If you have multiple adapters, you can set one as preferred by storing `aws-s3`, `cloudflare-r2`, or `vercel-blob` in `NEXT_PUBLIC_STORAGE_PREFERENCE`. See [FAQ](#will-there-be-support-for-image-storage-providers-beyond-vercel-aws-and-cloudflare) regarding unsupported providers.
+Only one storage Cloudflare R2 or AWS S3—can be used at a time. Ideally, this is configured before photos are uploaded (see [Issue #34](https://github.com/sambecker/exif-photo-blog/issues/34) for migration considerations). If you have multiple adapters, you can set one as preferred by storing `aws-s3` or `cloudflare-r2` in `NEXT_PUBLIC_STORAGE_PREFERENCE`. See [FAQ](#will-there-be-support-for-image-storage-providers-beyond-vercel-aws-and-cloudflare) regarding unsupported providers.
 
 ### Cloudflare R2
 
@@ -177,10 +182,12 @@ Only one storage adapter—Vercel Blob, Cloudflare R2, or AWS S3—can be used a
        "AllowedMethods": [
          "GET",
          "PUT"
-       ],
-       "AllowedOrigins": [
+       ],"AllowedOrigins": [
           "http://localhost:3000",
-          "https://{VERCEL_PROJECT_NAME}*.vercel.app",
+          "http://taufiqnajmi.*.sslip.io",
+          "http://*.taufiqnajmi.*.sslip.io",
+          "https://taufiqnajmi.*.sslip.io",
+          "https://*.taufiqnajmi.*.sslip.io",
           "{PRODUCTION_DOMAIN}"
        ]
    }]

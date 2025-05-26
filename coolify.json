@@ -1,0 +1,55 @@
+{
+  "name": "taufiqnajmi",
+  "type": "application",
+  "language": "nodejs",
+  "framework": "nextjs",
+  "buildPack": "nixpacks",
+  "buildCommand": "pnpm build",
+  "startCommand": "pnpm start:prod",
+  "installCommand": "pnpm install",
+  "port": 3000,
+  "deploymentType": "git",
+  "nodeVersion": "22.14.0",
+  "publishDirectory": ".next",
+  "envVars": [
+    {
+      "name": "NEXT_PUBLIC_STORAGE_PREFERENCE",
+      "value": "cloudflare-r2"
+    },
+    {
+      "name": "NODE_ENV",
+      "value": "production"
+    },
+    {
+      "name": "NIXPACKS_PKGS", 
+      "value": "nodejs_22 postgresql-client"
+    }
+  ],
+  "resources": {
+    "postgres": {
+      "type": "postgresql",
+      "required": true,
+      "version": "16",
+      "exposePort": true,
+      "settings": {
+        "healthCheckEnabled": true
+      },
+      "envVarPrefix": "POSTGRES"
+    }
+  },
+  "serviceSettings": {
+    "healthCheckPath": "/api/health",
+    "cors": {
+      "enabled": true
+    },
+    "resourceConnections": [
+      {
+        "resourceId": "postgres",
+        "envVarKeys": {
+          "connectionString": "POSTGRES_URL",
+          "connectionStringNonPooling": "POSTGRES_URL_NON_POOLING"
+        }
+      }
+    ]
+  }
+}
