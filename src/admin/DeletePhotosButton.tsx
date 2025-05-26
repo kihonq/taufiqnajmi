@@ -38,7 +38,7 @@ export default function DeletePhotosButton({
     <DeleteButton
       {...rest}
       isLoading={isLoading}
-      // eslint-disable-next-line max-len
+       
       confirmText={confirmText ?? `Are you sure you want to delete ${photosText}? This action cannot be undone.`}
       onClick={() => {
         onClick?.();

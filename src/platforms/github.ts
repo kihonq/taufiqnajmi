@@ -87,7 +87,7 @@ const getGitHubApiCompareToRepoUrl = ({
   repo,
   branch = DEFAULT_BRANCH,
 }: RepoParams = {}) =>
-  // eslint-disable-next-line max-len
+   
   `${getGitHubApiRepoUrl()}/compare/${TEMPLATE_REPO_BRANCH}...${owner}:${repo}:${branch}`;
 
 const getGitHubApiCompareToCommitUrl = ({ commit }: RepoParams = {}) =>

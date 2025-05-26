@@ -542,7 +542,7 @@ export const getPhotosNearId = async (
 
 export const getPhotosMeta = (options: GetPhotosOptions = {}) =>
   safelyQueryPhotos(async () => {
-    // eslint-disable-next-line max-len
+     
     let sql = 'SELECT COUNT(*), MIN(taken_at_naive) as start, MAX(taken_at_naive) as end FROM photos';
     const { wheres, wheresValues } = getWheresFromOptions(options);
     if (wheres) { sql += ` ${wheres}`; }
@@ -571,7 +571,7 @@ export const getPhoto = async (
     const photoId = translatePhotoId(id);
     return (includeHidden
       ? sql<PhotoDb>`SELECT * FROM photos WHERE id=${photoId} LIMIT 1`
-      // eslint-disable-next-line max-len
+       
       : sql<PhotoDb>`SELECT * FROM photos WHERE id=${photoId} AND hidden IS NOT TRUE LIMIT 1`)
       .then(({ rows }) => rows.map(parsePhotoFromDb))
       .then(photos => photos.length > 0 ? photos[0] : undefined);

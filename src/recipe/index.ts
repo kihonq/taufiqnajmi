@@ -96,7 +96,7 @@ export const generateRecipeLines = (
     );
   }
   lines.push(...abbreviate
-    // eslint-disable-next-line max-len
+     
     ? [`COL${addSign(data.color)} SHARP${addSign(data.sharpness)} CLAR${addSign(data.clarity)}`]
     : [
       `COLOR: ${addSign(data.color)}`,
@@ -124,7 +124,7 @@ export const generateRecipeLines = (
   }
   if (data.bwAdjustment || data.bwMagentaGreen) {
     lines.push(...abbreviate
-      // eslint-disable-next-line max-len
+       
       ? [`BW ADJ${addSign(data.bwAdjustment)} M/G${addSign(data.bwMagentaGreen)}`]
       : [
         `BW ADJUSTMENT: ${addSign(data.bwAdjustment)}`,

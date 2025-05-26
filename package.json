@@ -8,7 +8,7 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "start:prod": "./scripts/env-check.sh && ./scripts/db-check.sh && next start",
+    "start:prod": "./scripts/env-check.sh && ./scripts/db-check.sh && node .next/standalone/server.js",
     "lint": "next lint",
     "coolify:prestart": "npm run build",
     "coolify:prebuild": "chmod +x ./scripts/*.sh && echo 'Installing dependencies for Coolify deployment'",

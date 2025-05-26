@@ -167,7 +167,7 @@ export default function ImageInput({
                     canvas.height = height;
 
                     // Orientation transforms from:
-                    // eslint-disable-next-line max-len
+                     
                     // https://gist.github.com/SagiMedina/f00a57de4e211456225d3114fd10b0d0
                     
                     switch(orientation) {

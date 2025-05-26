@@ -99,7 +99,7 @@ const TEXT: I18NDeepPartial = {
     setupIncomplete: 'Finalizar configuração',
     setupSignIn: 'Entre para enviar fotografias',
     setupFirstPhoto: 'Adicione sua primeira fotografia',
-    // eslint-disable-next-line max-len
+     
     setupConfig: 'Altere o nome do sítio e outras configurações ao editar as variáveis de ambiente referenciadas em',
   },
   misc: {

@@ -176,7 +176,7 @@ export default function AdminBatchUploadActions({
                 />
               }
               onClick={async () => {
-                // eslint-disable-next-line max-len
+                 
                 if (confirm(`Are you sure you want to add all ${storageUrls.length} uploads?`)) {
                   setIsAdding(true);
                   setUrlAddStatuses(current => current.map((url, index) => ({

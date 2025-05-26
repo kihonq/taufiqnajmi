@@ -97,7 +97,7 @@ const TEXT = {
     setupIncomplete: 'Finish Setup',
     setupSignIn: 'Sign in to upload photos',
     setupFirstPhoto: 'Add your first photo',
-    // eslint-disable-next-line max-len
+     
     setupConfig: 'Change the site name and other configuration by editing environment variables referenced in',
   },
   misc: {

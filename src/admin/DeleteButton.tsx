@@ -19,7 +19,7 @@ export default function DeleteButton({
         'disabled:text-red-500/60! dark:disabled:text-red-500/60!',
         'disabled:bg-red-100/50! dark:disabled:bg-red-950/50!',
         'border-red-200! disabled:border-red-200! hover:border-red-300!',
-        // eslint-disable-next-line max-len
+         
         'dark:border-red-900/75! dark:disabled:border-red-900/75! dark:hover:border-red-900!',
         className,
       )}

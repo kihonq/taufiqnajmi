@@ -10,8 +10,10 @@ import { Pool, PoolConfig } from 'pg';
 const connectionOptions: PoolConfig = {
   // Use POSTGRES_URL environment variable for connection string
   connectionString: process.env.POSTGRES_URL,
-  // Disable SSL if DISABLE_POSTGRES_SSL is set to 1
-  ssl: process.env.DISABLE_POSTGRES_SSL ? false : undefined,
+  // SSL configuration with customization for self-signed certificates
+  ssl: process.env.DISABLE_POSTGRES_SSL ? false : {
+    rejectUnauthorized: false, // Accept self-signed certificates
+  },
 };
 
 // Create a connection pool for pooled queries
@@ -22,7 +24,9 @@ export const pool = new Pool(connectionOptions);
 export const getNonPooledClient = async () => {
   const nonPooledConfig: PoolConfig = {
     connectionString: process.env.POSTGRES_URL_NON_POOLING || process.env.POSTGRES_URL,
-    ssl: process.env.DISABLE_POSTGRES_SSL ? false : undefined,
+    ssl: process.env.DISABLE_POSTGRES_SSL ? false : {
+      rejectUnauthorized: false, // Accept self-signed certificates
+    },
   };
   
   const tempPool = new Pool(nonPooledConfig);
