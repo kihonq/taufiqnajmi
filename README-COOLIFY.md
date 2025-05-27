@@ -49,7 +49,7 @@ cmds = ["pnpm install"]
 cmds = ["pnpm build"]
 
 [start]
-cmd = "./scripts/env-check.sh && ./scripts/db-check.sh && node .next/standalone/server.js"
+cmd = "pnpm start:prod"
 
 [variables]
 NODE_ENV = "production"
@@ -62,7 +62,7 @@ NODE_ENV = "production"
   "dev": "next dev --turbo",
   "build": "next build",
   "start": "next start",
-  "start:prod": "./scripts/env-check.sh && ./scripts/db-check.sh && node .next/standalone/server.js",
+  "start:prod": "./scripts/env-check.sh && ./scripts/db-check.sh && next start",
   "lint": "next lint",
   "analyze": "ANALYZE=true next build"
 }

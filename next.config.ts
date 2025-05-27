@@ -34,7 +34,6 @@ const nextConfig: NextConfig = {
     remotePatterns,
     minimumCacheTTL: 31536000,
   },
-  output: 'standalone', // Enable standalone output for container deployment
 };
 
 module.exports = process.env.ANALYZE === 'true'
