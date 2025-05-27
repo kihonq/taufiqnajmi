@@ -10,16 +10,30 @@ if [ -z "$POSTGRES_URL" ]; then
   exit 1
 fi
 
-# Extract database connection details
-DB_HOST=$(echo $POSTGRES_URL | sed -n 's|.*@\([^:]*\):\([0-9]*\)/.*|\1|p')
-DB_PORT=$(echo $POSTGRES_URL | sed -n 's|.*@\([^:]*\):\([0-9]*\)/.*|\2|p')
-DB_NAME=$(echo $POSTGRES_URL | sed -n 's|.*/\([^?]*\).*|\1|p')
-if [[ -z "$DB_NAME" ]]; then
-  DB_NAME=$(echo $POSTGRES_URL | sed -n 's|.*/\(.*\)|\1|p')
-fi
+# Extract database connection details using a more robust approach with bash parameter substitution
+# Strip the protocol prefix
+URL_STRIPPED=${POSTGRES_URL#*://}
 
-DB_USER=$(echo $POSTGRES_URL | sed -n 's|postgresql://\([^:]*\):.*|\1|p')
-DB_PASSWORD=$(echo $POSTGRES_URL | sed -n 's|postgresql://[^:]*:\([^@]*\)@.*|\1|p')
+# Split auth part from host part (before/after @)
+AUTH_PART=${URL_STRIPPED%%@*}  # everything before @
+HOST_PART=${URL_STRIPPED#*@}   # everything after @
+
+# Get username and password
+DB_USER=${AUTH_PART%%:*}       # everything before :
+DB_PASSWORD=${AUTH_PART#*:}     # everything after :
+
+# Extract host and port
+HOST_PORT=${HOST_PART%%/*}     # everything before /
+DB_HOST=${HOST_PORT%%:*}       # everything before :
+DB_PORT=${HOST_PORT#*:}        # everything after :
+
+# Extract database name
+DB_PATH=${HOST_PART#*/}        # everything after /
+DB_NAME=${DB_PATH%%\?*}        # everything before ? (if exists)
+# If we didn't find a ?, then use the entire path
+if [[ "$DB_NAME" == "$DB_PATH" && "$DB_PATH" == *"?"* ]]; then
+  DB_NAME=${DB_PATH}
+fi
 
 echo "📊 Database parameters:"
 echo "   - Host: $DB_HOST"
