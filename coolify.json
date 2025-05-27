@@ -1,55 +1,49 @@
 {
+  "$schema": "https://cdn.coollabs.io/coolify/coolify.schema.json",
   "name": "taufiqnajmi",
-  "type": "application",
-  "language": "nodejs",
-  "framework": "nextjs",
-  "buildPack": "nixpacks",
-  "buildCommand": "pnpm build",
-  "startCommand": "pnpm start:prod",
-  "installCommand": "pnpm install",
-  "port": 3000,
-  "deploymentType": "git",
-  "nodeVersion": "22.14.0",
-  "publishDirectory": ".next",
-  "envVars": [
-    {
-      "name": "NEXT_PUBLIC_STORAGE_PREFERENCE",
-      "value": "cloudflare-r2"
-    },
-    {
-      "name": "NODE_ENV",
-      "value": "production"
-    },
-    {
-      "name": "NIXPACKS_PKGS", 
-      "value": "nodejs_22 postgresql-client"
-    }
-  ],
-  "resources": {
-    "postgres": {
-      "type": "postgresql",
-      "required": true,
-      "version": "16",
-      "exposePort": true,
-      "settings": {
-        "healthCheckEnabled": true
-      },
-      "envVarPrefix": "POSTGRES"
+  "description": "Photography blog and portfolio application",
+  "build": {
+    "build_pack": "nixpacks",
+    "build_command": "pnpm build",
+    "start_command": "pnpm start:prod",
+    "install_command": "pnpm install",
+    "publish_directory": ".next"
+  },
+  "network": {
+    "ports": {
+      "expose": "3000"
     }
   },
-  "serviceSettings": {
-    "healthCheckPath": "/api/health",
-    "cors": {
-      "enabled": true
-    },
-    "resourceConnections": [
+  "environment_variables": {
+    "production": [
       {
-        "resourceId": "postgres",
-        "envVarKeys": {
-          "connectionString": "POSTGRES_URL",
-          "connectionStringNonPooling": "POSTGRES_URL_NON_POOLING"
-        }
+        "key": "NODE_ENV",
+        "value": "production"
+      },
+      {
+        "key": "NIXPACKS_PKGS",
+        "value": "nodejs_22 postgresql-client"
       }
     ]
-  }
+  },
+  "health_check": {
+    "enabled": true,
+    "path": "/api/health"
+  },
+  "settings": {
+    "proxy": {
+      "force_https": true,
+      "gzip": true
+    },
+    "docker": {
+      "network": {
+        "connect": true
+      }
+    }
+  },
+  "tags": [
+    "nextjs",
+    "photo-gallery",
+    "nodejs"
+  ]
 }
