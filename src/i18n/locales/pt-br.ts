@@ -1,6 +1,7 @@
 import { I18NDeepPartial } from '..';
+export { ptBR as default } from 'date-fns/locale/pt-BR';
 
-const TEXT: I18NDeepPartial = {
+export const TEXT: I18NDeepPartial = {
   photo: {
     photo: 'Foto',
     photoPlural: 'Fotos',
@@ -89,6 +90,8 @@ const TEXT: I18NDeepPartial = {
     edit: 'Editar',
     favorite: 'Favoritar',
     unfavorite: 'Remover dos favoritos',
+    hide: 'Ocultar',
+    unhide: 'Mostrar',
     download: 'Baixar',
     sync: 'Sincronizar',
     delete: 'Excluir',
@@ -114,5 +117,3 @@ const TEXT: I18NDeepPartial = {
     paginateAction: '{{action}} {{index}} de {{count}}',
   },
 };
-
-export default TEXT;
