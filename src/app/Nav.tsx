@@ -20,6 +20,7 @@ import {
 } from './config';
 import { useRef } from 'react';
 import useStickyNav from './useStickyNav';
+import TrueFocusText from '@/components/TrueFocusText';
 
 const NAV_HEIGHT_CLASS = NAV_CAPTION
   ? 'min-h-[4rem] sm:min-h-[5rem]'
@@ -47,7 +48,7 @@ export default function Nav({
     linkOrAction: string | (() => void),
   ) =>
     typeof linkOrAction === 'string'
-      ? <Link href={linkOrAction}>{text}</Link>
+      ? <Link href={linkOrAction}><TrueFocusText sentence={text} /></Link>
       : <button onClick={linkOrAction}>{text}</button>;
 
   const switcherSelectionForPath = (): SwitcherSelection | undefined => {
@@ -90,7 +91,7 @@ export default function Nav({
                 'hidden xs:block',
                 'translate-y-[-1px]',
               )}>
-                <div className="truncate overflow-hidden select-none">
+                <div className="select-none">
                   {renderLink(navTitle, PATH_ROOT)}
                 </div>
                 {navCaption &&
