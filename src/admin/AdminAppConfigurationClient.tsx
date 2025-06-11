@@ -30,6 +30,7 @@ import AdminLink from './AdminLink';
 import ScoreCardContainer from '@/components/ScoreCardContainer';
 import { DEFAULT_CATEGORY_KEYS, getHiddenCategories } from '@/category';
 import { AI_AUTO_GENERATED_FIELDS_ALL } from '@/photo/ai';
+import clsx from 'clsx/lite';
 
 export default function AdminAppConfigurationClient({
   // Storage
@@ -48,11 +49,17 @@ export default function AdminAppConfigurationClient({
   // Content
   locale,
   hasLocale,
+  domain,
   hasDomain,
-  hasNavTitle,
-  hasNavCaption,
+  metaTitle,
   isMetaTitleConfigured,
+  metaDescription,
   isMetaDescriptionConfigured,
+  navTitle,
+  hasNavTitle,
+  navCaption,
+  hasNavCaption,
+  pageAbout,
   hasPageAbout,
   // AI
   hasOpenaiBaseUrl,
@@ -118,6 +125,15 @@ export default function AdminAppConfigurationClient({
   simplifiedView?: boolean
   isAnalyzingConfiguration?: boolean
 }) {
+  const renderContent = (content?: ReactNode) => content
+    ? <div className={clsx(
+      'my-1 px-2 py-1',
+      'bg-dim rounded-lg',
+    )}>
+      {content}
+    </div>
+    : null;
+
   const renderEnvVars = (variables: string[]) =>
     <div className="pt-1 flex flex-col gap-1">
       {variables.map(variable =>
@@ -274,10 +290,11 @@ export default function AdminAppConfigurationClient({
         icon={<BiPencil size={16} />}
       >
         <ChecklistRow
-          title={`Configure language: ${locale}`}
+          title="Configure language"
           status={hasLocale}
           optional
         >
+          {renderContent(locale)}
           Store in environment variable
           (check README for
           {' '}
@@ -293,6 +310,7 @@ export default function AdminAppConfigurationClient({
           title="Configure domain"
           status={hasDomain}
         >
+          {renderContent(domain)}
           Store in environment variable
           (used in explicit share urls, seen in nav if no title is defined):
           {renderEnvVars(['NEXT_PUBLIC_DOMAIN'])}
@@ -302,6 +320,7 @@ export default function AdminAppConfigurationClient({
           status={isMetaTitleConfigured}
           showWarning
         >
+          {renderContent(metaTitle)}
           Store in environment variable
           (seen in search results and browser tab):
           {renderEnvVars(['NEXT_PUBLIC_META_TITLE'])}
@@ -312,6 +331,7 @@ export default function AdminAppConfigurationClient({
             status={isMetaDescriptionConfigured}
             optional
           >
+            {renderContent(metaDescription)}
             Store in environment variable
             (seen in search results):
             {renderEnvVars(['NEXT_PUBLIC_META_DESCRIPTION'])}
@@ -321,7 +341,8 @@ export default function AdminAppConfigurationClient({
             status={hasNavTitle}
             optional
           >
-            Store in environment variable (replaces domain in nav):
+            {renderContent(navTitle)}
+            Store in environment variable (replaces domain in top-right nav):
             {renderEnvVars(['NEXT_PUBLIC_NAV_TITLE'])}
           </ChecklistRow>
           <ChecklistRow
@@ -329,7 +350,8 @@ export default function AdminAppConfigurationClient({
             status={hasNavCaption}
             optional
           >
-            Store in environment variable (seen in nav, under title):
+            {hasNavCaption && renderContent(navCaption)}
+            Store in environment variable (seen in top-right nav, under title):
             {renderEnvVars(['NEXT_PUBLIC_NAV_CAPTION'])}
           </ChecklistRow>
           <ChecklistRow
@@ -337,6 +359,7 @@ export default function AdminAppConfigurationClient({
             status={hasPageAbout}
             optional
           >
+            {hasPageAbout && renderContent(pageAbout)}
             Store in environment variable (seen in sidebar):
             {renderEnvVars(['NEXT_PUBLIC_PAGE_ABOUT'])}
           </ChecklistRow>
