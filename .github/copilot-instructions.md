@@ -1,4 +1,4 @@
-# GitHub Copilot Instructions for Taufiq Najmi Photo Blog
+# GitHub Copilot Instructions for Taufiq Zainal Photo Blog
 
 This project is a Next.js-based photo blog built on the [EXIF Photo Blog](https://github.com/sambecker/exif-photo-blog) template. It's a modern web application that displays photos with their EXIF metadata, featuring AI-generated descriptions, custom tagging, and various photo organization methods.
 

@@ -81,7 +81,7 @@ export default function TemplateImageResponse({
             justifyContent: 'flex-end',
             flexGrow: 1,
           }}>
-            Taufiq Najmi&apos;s Lens
+            Taufiq Zainal&apos;s Lens
           </div>
         </div>}
       <div style={{
