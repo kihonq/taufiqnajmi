@@ -48,7 +48,7 @@ export default function Nav({
     linkOrAction: string | (() => void),
   ) =>
     typeof linkOrAction === 'string'
-      ? <Link href={linkOrAction}><TrueFocusText sentence={text} /></Link>
+      ? <Link href={linkOrAction}><TrueFocusText sentence={text} borderColor='#17f213' /></Link>
       : <button onClick={linkOrAction}>{text}</button>;
 
   const switcherSelectionForPath = (): SwitcherSelection | undefined => {
